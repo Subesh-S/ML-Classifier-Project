@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EV Vehicle Classifier</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+    width: 350px;
+}
+
+h2 {
+    color: #333;
+}
+
+input[type=file] {
+    margin: 15px 0;
+}
+
+input[type=submit] {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+input[type=submit]:hover {
+    background: #45a049;
+}
+
+h1 {
+    color: #2196F3;
+    font-size: 22px;
+}
+
+img {
+    margin-top: 15px;
+    border-radius: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>⚡ EV Vehicle Classifier</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" required>
+    <br>
+    <input type="submit" value="Predict">
+</form>
+
+<h1>{{result}}</h1>
+
+<img src="/static/test.jpg" width="300">
+
+</div>
+
+</body>
+</html>

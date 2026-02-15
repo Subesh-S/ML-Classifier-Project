@@ -3,76 +3,154 @@
 <head>
 <title>EV Vehicle Classifier</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-    font-family: Arial, sans-serif;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.container {
-    background: white;
-    padding: 30px 40px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
-    width: 350px;
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    font-family:'Inter', sans-serif;
 }
 
-h2 {
-    color: #333;
+.card{
+    width:420px;
+    padding:40px;
+    background:#111827;
+    border-radius:25px;
+    box-shadow:0 0 40px rgba(0,255,255,0.3);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
 }
 
-input[type=file] {
-    margin: 15px 0;
+/* FIXED: allow clicks through animation */
+.card::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background: radial-gradient(circle, rgba(0,255,255,0.08), transparent 70%);
+    top:-50%;
+    left:-50%;
+    animation: rotate 8s linear infinite;
+    pointer-events:none;   /* IMPORTANT FIX */
 }
 
-input[type=submit] {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
+@keyframes rotate{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
 }
 
-input[type=submit]:hover {
-    background: #45a049;
+.card > *{
+    position:relative;
+    z-index:2;   /* Ensure content is above animation */
 }
 
-h1 {
-    color: #2196F3;
-    font-size: 22px;
+h2{
+    font-family:'Orbitron', sans-serif;
+    color:#00ffff;
+    margin-bottom:25px;
+    letter-spacing:1px;
 }
 
-img {
-    margin-top: 15px;
-    border-radius: 10px;
+.upload-box{
+    margin:20px 0;
 }
+
+input[type="file"]{
+    display:none;
+}
+
+.custom-upload{
+    display:inline-block;
+    padding:12px 25px;
+    border:2px dashed #00ffff;
+    border-radius:15px;
+    color:#00ffff;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.custom-upload:hover{
+    background:#00ffff;
+    color:#111827;
+}
+
+.predict-btn{
+    margin-top:20px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:50px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    background: linear-gradient(90deg,#00ffff,#00c3ff);
+    color:#111827;
+    transition:0.3s;
+}
+
+.predict-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px #00ffff;
+}
+
+.result-badge{
+    margin-top:25px;
+    padding:12px;
+    border-radius:12px;
+    background:#1f2937;
+    color:#00ffff;
+    font-weight:500;
+    font-size:16px;
+    border:1px solid #00ffff;
+}
+
+.preview-img{
+    margin-top:20px;
+    width:100%;
+    border-radius:15px;
+    border:2px solid #00ffff;
+    box-shadow:0 0 20px rgba(0,255,255,0.3);
+}
+
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<div class="card">
 
-<h2>⚡ EV Vehicle Classifier</h2>
+<h2>⚡ EV AI Classifier</h2>
 
 <form method="POST" enctype="multipart/form-data">
-    <input type="file" name="image" required>
-    <br>
-    <input type="submit" value="Predict">
+
+<div class="upload-box">
+    <label class="custom-upload">
+        Upload Vehicle Image
+        <input type="file" name="image" required>
+    </label>
+</div>
+
+<button type="submit" class="predict-btn">Predict Now</button>
+
 </form>
 
-<h1>{{result}}</h1>
+<div class="result-badge">
+    {{result}}
+</div>
 
-<img src="/static/test.jpg" width="300">
+<img src="/static/test.jpg" class="preview-img">
 
 </div>
 
